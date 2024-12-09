@@ -12,19 +12,19 @@ export default function SignIn(props) {
 
         const result = await supabase.auth.signInWithPassword({
             email: email,
-            password: password
+            password: password,
         });
 
         console.log(result);
         if (result.error) {
             setResult("Dogodila se greška prilikom prijave!");
         } else {
-            setResult("Prijava je uspijela.");
+            setResult("Prijava je uspjela.");
         }
     }
 
     return (
-<>
+        <>
             <Show when={result()}>
                 <div class="bg-slate-300 p-4 rounded">
                     {result()}
@@ -33,22 +33,29 @@ export default function SignIn(props) {
 
             <form onSubmit={formSubmit}>
                 <div class="p-2 flex flex-col gap-1">
-                    <label>E-mail adresa:</label>
-                    <label type="email" name="email" required="true"></label>
+                    <label for="email">E-mail adresa:</label>
+                    <input type="email" id="email" name="email" required />
                 </div>
 
-                <form onSubmit={formSubmit}>
-                    <div class="p-2 flex flex-col gap-1">
-                        <label>Zaporka:</label>
-                        <label type="password" name="password" required="true" min="6"></label>
-                    </div>
+                <div class="p-2 flex flex-col gap-1">
+                    <label for="password">Zaporka:</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                        minLength="6"
+                    />
+                </div>
 
-                    <div class="p-2 flex flex-col gap-1">
-                        <input type="submit" value="Pošalji" class="bg-slate-600 text-white p-2 rounded" />
-                    </div>
-                </form>
-</>
-
-            );
-
+                <div class="p-2 flex flex-col gap-1">
+                    <input
+                        type="submit"
+                        value="Pošalji"
+                        class="bg-slate-600 text-white p-2 rounded"
+                    />
+                </div>
+            </form>
+        </>
+    );
 }
