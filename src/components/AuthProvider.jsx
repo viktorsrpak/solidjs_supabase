@@ -13,7 +13,6 @@ export function AuthProvider(props) {
 
 
     supabase.auth.onAuthStateChange((event, session) => {
-        console.log(event, session);
 
         if (event === "SIGNED_IN" || event === "USER_UPDATED") {
             setSession(session);
@@ -28,12 +27,12 @@ export function AuthProvider(props) {
 
     });
 
-return(
-    <Show when={!loading()}>
-        <AuthContext.Provider value={session}>{props.children}</AuthContext.Provider>
+    return (
+        <Show when={!loading()}>
+            <AuthContext.Provider value={session}>{props.children}</AuthContext.Provider>
 
-    </Show>
-)
+        </Show>
+    )
 
 
 

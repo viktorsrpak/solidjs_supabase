@@ -6,6 +6,7 @@ import { Show } from "solid-js";
 import SignIn from "./pages/SignIn";
 import SignOut from "./pages/SignOut";
 import { A } from "@solidjs/router";
+import Projects from "./pages/Projects";
 
 export default function App() {
   return (
@@ -13,8 +14,9 @@ export default function App() {
 
       <Router root={Layout}>
         <Route path="/" component={Home} />
-        <Route path="signin" component={SignIn} />
-        <Route path="signout" component={SignOut} />
+        <Route path="/signin" component={SignIn} />
+        <Route path="/signout" component={SignOut} />
+        <Route path="/projects" component={Projects} />
       </Router>
 
     </AuthProvider>
@@ -35,14 +37,20 @@ function Layout(props) {
     <div className="min-h-screen flex flex-col p-4 gap-4">
 
       <div>
-        <div class="flex gap-2">
+
+<div class="flex gap-2">
+        <Show when={session()}>
+          <A href="/projects" class="bg-orange-400 p-2 rounded hover:bg-red-300">Novi projekt</A>
+        </Show>
+
+        
           <A href="/" class="bg-orange-400 p-2 rounded hover:bg-red-300">Naslovnica</A>
           <Show when={!session()}>
-            <A href="signin" class="bg-orange-400 p-2 rounded hover:bg-red-300">Prijava</A>
+            <A href="/signin" class="bg-orange-400 p-2 rounded hover:bg-red-300">Prijava</A>
           </Show>
 
           <Show when={session()}>
-            <A href="signout" class="bg-orange-400 p-2 rounded hover:bg-red-300">Odjava</A>
+            <A href="/signout" class="bg-orange-400 p-2 rounded hover:bg-red-300">Odjava</A>
           </Show>
 
         </div>
